@@ -1,10 +1,12 @@
 services:
   word-hero-web:
+    env_file:
+      - .env
     build:
       context: .
       dockerfile: Dockerfile
       args:
-        - REACT_APP_API_URL=http://192.168.132.128:8080
+        - REACT_APP_API_URL=${REACT_APP_API_URL}
     container_name: word-hero-web
     ports:
       - "3000:80"
@@ -21,7 +23,6 @@ services:
       start_period: 40s
     environment:
       - NODE_ENV=production
-      - REACT_APP_API_URL=http://192.168.132.128:8080
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.word-hero-web.rule=Host(`localhost`)"
