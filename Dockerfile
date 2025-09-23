@@ -13,7 +13,9 @@ RUN npm ci --only=production
 # 复制源代码
 COPY . .
 
-# 构建生产版本
+# 构建生产版本（使用环境变量）
+ARG REACT_APP_API_URL
+ENV REACT_APP_API_URL=${REACT_APP_API_URL:-http://localhost:8080}
 RUN npm run build
 
 # 生产阶段

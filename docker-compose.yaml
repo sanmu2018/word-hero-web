@@ -1,10 +1,10 @@
-version: '3.8'
-
 services:
   word-hero-web:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - REACT_APP_API_URL=http://192.168.132.128:8080
     container_name: word-hero-web
     ports:
       - "3000:80"
