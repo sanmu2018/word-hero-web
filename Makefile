@@ -3,7 +3,7 @@
 
 # 变量定义
 APP_NAME :=word-hero-web
-VERSION :=v0.0.1
+VERSION :=v0.0.2
 DOCKER_REGISTRY :=docker.io
 DOCKER_USERNAME :=sanmu2018
 IMAGE_NAME :=$(DOCKER_USERNAME)/$(APP_NAME)
