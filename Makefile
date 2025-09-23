@@ -33,8 +33,8 @@ help:
 	@echo "  $(YELLOW)show-info$(NC)   显示镜像信息"
 	@echo ""
 	@echo "$(GREEN)Docker Compose 命令:$(NC)"
-	@echo "  $(YELLOW)up$(NC)          启动服务 (docker-compose up)"
-	@echo "  $(YELLOW)down$(NC)        停止服务 (docker-compose down)"
+	@echo "  $(YELLOW)up$(NC)          启动服务 (docker compose up)"
+	@echo "  $(YELLOW)down$(NC)        停止服务 (docker compose down)"
 	@echo "  $(YELLOW)restart$(NC)     重启服务"
 	@echo "  $(YELLOW)ps$(NC)          查看服务状态"
 
@@ -107,46 +107,46 @@ show-info:
 .PHONY: up
 up:
 	@echo "$(BLUE)正在启动服务...$(NC)"
-	docker-compose up -d
+	docker compose up -d
 	@echo "$(GREEN)服务启动完成$(NC)"
 
 # Docker Compose 停止服务
 .PHONY: down
 down:
 	@echo "$(BLUE)正在停止服务...$(NC)"
-	docker-compose down
+	docker compose down
 	@echo "$(GREEN)服务已停止$(NC)"
 
 # Docker Compose 重启服务
 .PHONY: restart
 restart:
 	@echo "$(BLUE)正在重启服务...$(NC)"
-	docker-compose restart
+	docker compose restart
 	@echo "$(GREEN)服务已重启$(NC)"
 
 # Docker Compose 查看服务状态
 .PHONY: ps
 ps:
 	@echo "$(BLUE)服务状态:$(NC)"
-	docker-compose ps
+	docker compose ps
 
 # 查看实时日志
 .PHONY: logs-compose
 logs-compose:
 	@echo "$(BLUE)服务日志:$(NC)"
-	docker-compose logs -f
+	docker compose logs -f
 
 # 开发模式 (热重载)
 .PHONY: dev
 dev:
 	@echo "$(BLUE)启动开发环境...$(NC)"
-	docker-compose -f docker-compose.dev.yml up -d
+	docker compose -f docker compose.dev.yml up -d
 
 # 停止开发环境
 .PHONY: dev-stop
 dev-stop:
 	@echo "$(BLUE)停止开发环境...$(NC)"
-	docker-compose -f docker-compose.dev.yml down
+	docker compose -f docker compose.dev.yml down
 
 # 完整构建流程 (构建 + 标记 + 推送)
 .PHONY: release
@@ -166,7 +166,7 @@ cleanup:
 	docker rm $(APP_NAME) 2>/dev/null || true
 	docker rmi $(IMAGE_NAME):$(IMAGE_TAG) 2>/dev/null || true
 	docker rmi $(IMAGE_NAME):latest 2>/dev/null || true
-	docker-compose down -v --remove-orphans 2>/dev/null || true
+	docker compose down -v --remove-orphans 2>/dev/null || true
 	@echo "$(GREEN)清理完成$(NC)"
 
 # 检查 Docker 环境
@@ -174,5 +174,5 @@ cleanup:
 check-docker:
 	@echo "$(BLUE)检查 Docker 环境...$(NC)
 	@docker --version
-	@docker-compose --version
+	@docker compose --version
 	@echo "$(GREEN)Docker 环境检查完成$(NC)"
