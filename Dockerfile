@@ -27,6 +27,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 # 从构建阶段复制构建结果
 COPY --from=builder /app/build /usr/share/nginx/html
+COPY --from=builder /app/.env /usr/share/nginx/html/.env
 
 # 暴露端口
 EXPOSE 80
