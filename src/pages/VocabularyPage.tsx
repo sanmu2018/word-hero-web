@@ -17,7 +17,8 @@ import {
   Radio,
   Table,
   Popconfirm,
-  Dropdown
+  Dropdown,
+  Avatar
 } from 'antd';
 import {
   SearchOutlined,
@@ -29,7 +30,10 @@ import {
   UndoOutlined,
   ClearOutlined,
   BarChartOutlined,
-  LogoutOutlined
+  LogoutOutlined,
+  UserOutlined,
+  SettingOutlined,
+  DownOutlined
 } from '@ant-design/icons';
 import { VocabularyService } from '../services/vocabularyService';
 import { AuthService } from '../services/authService';
@@ -437,19 +441,57 @@ const VocabularyPage: React.FC = () => {
                 统计
               </Button>
               {user ? (
-                <Space>
-                  <Text style={{ color: 'white' }}>
-                    欢迎，{user.username}
-                  </Text>
-                  <Button
-                    icon={<LogoutOutlined />}
-                    onClick={handleLogout}
-                    type="text"
-                    style={{ color: 'white' }}
-                  >
-                    退出
-                  </Button>
-                </Space>
+                <Dropdown
+                  menu={{
+                    items: [
+                      {
+                        key: 'profile',
+                        icon: <UserOutlined />,
+                        label: '个人资料',
+                        onClick: () => message.info('个人资料功能开发中')
+                      },
+                      {
+                        key: 'settings',
+                        icon: <SettingOutlined />,
+                        label: '设置',
+                        onClick: () => message.info('设置功能开发中')
+                      },
+                      {
+                        type: 'divider'
+                      },
+                      {
+                        key: 'logout',
+                        icon: <LogoutOutlined />,
+                        label: '退出登录',
+                        onClick: handleLogout
+                      }
+                    ]
+                  }}
+                  placement="bottomRight"
+                  arrow
+                >
+                  <Space style={{
+                    color: 'white',
+                    cursor: 'pointer',
+                    padding: '4px 8px',
+                    borderRadius: '4px',
+                    transition: 'background-color 0.3s'
+                  }}
+                  className="user-profile-dropdown">
+                    <Avatar
+                      size="small"
+                      icon={<UserOutlined />}
+                      style={{
+                        backgroundColor: '#f56a00',
+                        marginRight: '8px'
+                      }}
+                    />
+                    <Text style={{ color: 'white' }}>
+                      {user.username}
+                    </Text>
+                    <DownOutlined style={{ color: 'white', fontSize: '12px' }} />
+                  </Space>
+                </Dropdown>
               ) : (
                 <Space>
                   <Button
