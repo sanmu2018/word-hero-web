@@ -2,12 +2,12 @@
 # 用于构建和管理 Docker 镜像
 
 # 变量定义
-APP_NAME := word-hero-web
-VERSION := 0.0.1
-DOCKER_REGISTRY := docker.io
-DOCKER_USERNAME := sanmu2018  # 请修改为你的 Docker 用户名
-IMAGE_NAME := $(DOCKER_USERNAME)/$(APP_NAME)
-IMAGE_TAG := $(VERSION)
+APP_NAME :=word-hero-web
+VERSION :=0.0.1
+DOCKER_REGISTRY :=docker.io
+DOCKER_USERNAME :=sanmu2018
+IMAGE_NAME :=$(DOCKER_USERNAME)/$(APP_NAME)
+IMAGE_TAG :=$(VERSION)
 
 # 颜色输出
 RED := \033[0;31m
