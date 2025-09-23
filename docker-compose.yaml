@@ -1,6 +1,6 @@
 services:
   word-hero-web:
-    image: sanmu2018/word-hero-web:v0.0.2
+    image: sanmu2018/word-hero-web:v0.0.1
     env_file:
       - .env
     container_name: word-hero-web
