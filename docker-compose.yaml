@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  word-hero-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: word-hero-web
+    ports:
+      - "3000:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    restart: unless-stopped
+    networks:
+      - word-hero-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    environment:
+      - NODE_ENV=production
+      - REACT_APP_API_URL=http://192.168.132.128:8080
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.word-hero-web.rule=Host(`localhost`)"
+      - "traefik.http.services.word-hero-web.loadbalancer.server.port=80"
+
+networks:
+  word-hero-network:
+    driver: bridge
+
+volumes:
+  word-hero-data:
+    driver: local
