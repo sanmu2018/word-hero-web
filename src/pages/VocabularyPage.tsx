@@ -18,7 +18,8 @@ import {
   Table,
   Popconfirm,
   Dropdown,
-  Avatar
+  Avatar,
+  Checkbox
 } from 'antd';
 import {
   SearchOutlined,
@@ -698,15 +699,12 @@ const VocabularyPage: React.FC = () => {
                       onClick={() => playPronunciation(record.english)}
                       title="发音"
                     />
-                    <Button
-                      type={knownWords.has(record.id) ? "default" : "primary"}
-                      size="small"
-                      onClick={() => markWord(record.id, !knownWords.has(record.id))}
+                    <Checkbox
+                      checked={knownWords.has(record.id)}
+                      onChange={(e) => markWord(record.id, e.target.checked)}
                       disabled={!user}
-                      title={!user ? "请先登录" : undefined}
-                    >
-                      {knownWords.has(record.id) ? '不认识' : '认识'}
-                    </Button>
+                      title={knownWords.has(record.id) ? "已认识，点击标记为不认识" : "标记为认识"}
+                    />
                   </Space>
                 )}
               />

@@ -202,3 +202,23 @@
 .user-profile-dropdown:hover .ant-avatar {
   transform: scale(1.1);
 }
+
+/* 单词学习状态复选框样式 */
+.vocabulary-table .ant-checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.vocabulary-table .ant-checkbox {
+  top: 0;
+}
+
+.vocabulary-table .ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #52c41a;
+  border-color: #52c41a;
+}
+
+.vocabulary-table .ant-checkbox-wrapper:hover .ant-checkbox-inner {
+  border-color: #52c41a;
+}
