@@ -408,14 +408,30 @@ const VocabularyPage: React.FC = () => {
   };
 
   const loadStats = async () => {
+    if (!user) {
+      message.warning('请先登录后再查看统计');
+      setLoginVisible(true);
+      return;
+    }
+
     try {
       const response = await vocabularyService.getStats();
       if (response.code === 0) {
         setStats(response.data);
         setStatsVisible(true);
+      } else {
+        message.error(response.msg || '获取统计信息失败');
       }
-    } catch (error) {
-      message.error('获取统计信息失败');
+    } catch (error: any) {
+      if (error?.response?.status === 401) {
+        message.warning('登录已过期，请重新登录');
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('currentUser');
+        setUser(null);
+        setLoginVisible(true);
+      } else {
+        message.error('获取统计信息失败');
+      }
     }
   };
 
