@@ -48,7 +48,7 @@ export class VocabularyService {
 
   async getStats(): Promise<ApiResponse<Stats>> {
     try {
-      const response = await api.get('/api/stats');
+      const response = await api.get('/api/word-tags/stats');
       return response.data;
     } catch (error) {
       throw new Error('Failed to fetch stats');
